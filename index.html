@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>좌석 선택</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>좌석 선택</h1>
+        <div class="seat-container">
+            <!-- 좌석 배치 코드 -->
+        </div>
+        <div class="control-panel">
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="seat available"></div>
+                    <span>선택 가능</span>
+                </div>
+                <div class="legend-item">
+                    <div class="seat selected"></div>
+                    <span>선택됨</span>
+                </div>
+                <div class="legend-item">
+                    <div class="seat unavailable"></div>
+                    <span>선택 불가능</span>
+                </div>
+            </div>
+            <button id="reset-btn">초기화</button>
+            <button id="save-btn" disabled>저장하기</button>
+        </div>
+        <div id="reservation-info" class="hidden">
+            <h2>좌석 선택 정보</h2>
+            <ul id="reservation-list"></ul>
+            <button id="admin-btn">관리자 모드</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
