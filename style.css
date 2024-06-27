@@ -95,3 +95,36 @@
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
 }
+.seat-info,
+.audience-count {
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    padding: 10px 15px;
+    background-color: #f2f2f2;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.seat-info {
+    top: 20px;
+    right: 20px;
+}
+
+.audience-count {
+    top: 20px;
+    left: 20px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
