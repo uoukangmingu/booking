@@ -1,17 +1,31 @@
 ﻿.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stage {
+    width: 605px; /* 좌석 div들의 전체 너비와 일치 */
+    height: 50px;
+    background-color: #333;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    border-radius: 10px 10px 30px 30px;
 }
 
 .seat-container {
     display: grid;
-    grid-template-columns: repeat(11, 40px);
-    grid-template-rows: repeat(11, 40px);
-    gap: 10px;
+    grid-template-columns: repeat(11, 50px);
+    grid-template-rows: repeat(14, 50px);
+    gap: 5px;
     justify-content: center;
-    margin-bottom: 20px;
 }
+
 
 .seat {
     background-color: #ccc;
@@ -21,71 +35,63 @@
     align-items: center;
     font-weight: bold;
     cursor: pointer;
-}
-
-.seat.available:hover {
-    background-color: #aaa;
+    font-size: 100%;
+    width: 50px;
+    height: 50px;
 }
 
 .seat.selected {
-    background-color: #4caf50;
-    color: white;
+    background-color: #05F258;
 }
 
-.seat.unavailable {
-    background-color: #f44336;
-    color: white;
-    cursor: not-allowed;
+.seat.confirmed {
+    background-color: #013440;
 }
 
-.control-panel {
+.seat.cancel-target {
+    background-color: #FF0000;
+}
+
+.button-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.legend {
-    display: flex;
-    align-items: center;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-}
-
-.legend-item .seat {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-#reservation-info {
+    justify-content: center;
     margin-top: 20px;
 }
 
-#reservation-info.hidden {
+#confirmBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+#cancelContainer {
     display: none;
+    align-items: center;
+    margin-left: 10px;
 }
 
-#reservation-list {
-    list-style-type: none;
-    padding: 0;
+#cancelBtn {
+    padding: 10px 20px;
+    font-size: 16px;
 }
 
-#reservation-list li {
-    margin-bottom: 10px;
-}
-
-#reservation-list li span {
+#confirmMessage {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    font-size: 24px;
     font-weight: bold;
+    text-align: center;
+    z-index: 1;
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
-@media (max-width: 600px) {
-    .seat-container {
-        grid-template-columns: repeat(6, 30px);
-        grid-template-rows: repeat(18, 30px);
-    }
+#confirmMessage.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
 }
