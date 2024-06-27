@@ -1,4 +1,4 @@
-﻿const seatContainer = document.querySelector('.seat-container');
+const seatContainer = document.querySelector('.seat-container');
 const confirmBtn = document.getElementById('confirmBtn');
 const cancelContainer = document.getElementById('cancelContainer');
 const cancelBtn = document.getElementById('cancelBtn');
@@ -19,6 +19,15 @@ function createSeats() {
     }
 }
 
+// 페이지 로드 시 웹 스토리지에서 확정 좌석 정보 가져오기
+window.addEventListener('load', () => {
+    const confirmedSeats = JSON.parse(localStorage.getItem('confirmedSeats')) || [];
+    confirmedSeats.forEach(seatIndex => {
+        const seat = seats[seatIndex];
+        seat.classList.add('confirmed');
+    });
+});
+
 function toggleSeatSelection() {
     if (this.classList.contains('confirmed')) return;
     this.classList.toggle('selected');
@@ -31,6 +40,10 @@ function toggleSeatSelection() {
 }
 
 function confirmSelectedSeats() {
+    const confirmedSeatIndices = selectedSeats.map(seat => seats.indexOf(seat));
+    const existingConfirmedSeats = JSON.parse(localStorage.getItem('confirmedSeats')) || [];
+    const updatedConfirmedSeats = [...existingConfirmedSeats, ...confirmedSeatIndices];
+    localStorage.setItem('confirmedSeats', JSON.stringify(updatedConfirmedSeats));
     selectedSeats.forEach(seat => {
         seat.classList.add('confirmed');
         seat.classList.remove('selected');
@@ -38,6 +51,7 @@ function confirmSelectedSeats() {
     selectedSeats = [];
     showConfirmMessage('선택한 좌석이 확정되었습니다.');
 }
+
 
 function toggleCancelContainer() {
     isCancelContainerVisible = !isCancelContainerVisible;
@@ -68,6 +82,10 @@ function toggleCancelTarget() {
 }
 
 function cancelSelectedSeats() {
+    const cancelledSeatIndices = cancelTargets.map(seat => seats.indexOf(seat));
+    const confirmedSeats = JSON.parse(localStorage.getItem('confirmedSeats')) || [];
+    const updatedConfirmedSeats = confirmedSeats.filter(index => !cancelledSeatIndices.includes(index));
+    localStorage.setItem('confirmedSeats', JSON.stringify(updatedConfirmedSeats));
     cancelTargets.forEach(seat => {
         seat.classList.remove('confirmed', 'cancel-target');
     });
