@@ -26,7 +26,6 @@ function createSeats() {
 }
 
 
-// 페이지 로드 시 웹 스토리지에서 확정 좌석 정보 가져오기
 window.addEventListener('load', () => {
     const confirmedSeats = JSON.parse(localStorage.getItem('confirmedSeats')) || [];
     const storedDiscountedSeatsMap = JSON.parse(localStorage.getItem('discountedSeatsMap')) || {};
@@ -42,8 +41,9 @@ window.addEventListener('load', () => {
             seat.classList.add('discounted');
         }
     });
+    toggleCancelContainer();
+    updateSeatInfo();
 });
-
 
 
 function toggleSeatSelection() {
