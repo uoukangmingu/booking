@@ -2,6 +2,7 @@ const seatContainer = document.querySelector('.seat-container');
 const confirmBtn = document.getElementById('confirmBtn');
 const cancelContainer = document.getElementById('cancelContainer');
 const cancelBtn = document.getElementById('cancelBtn');
+const cancelAllBtn = document.getElementById('cancelAllBtn');
 const confirmMessage = document.getElementById('confirmMessage');
 const seats = [];
 let selectedSeats = [];
@@ -64,12 +65,25 @@ function toggleCancelContainer() {
             seat.addEventListener('click', toggleCancelTarget);
         });
         cancelBtn.addEventListener('click', cancelSelectedSeats);
+        cancelAllBtn.addEventListener('click', cancelAllSeats); // 추가된 코드
     } else {
         seats.forEach(seat => {
             seat.removeEventListener('click', toggleCancelTarget);
         });
         cancelBtn.removeEventListener('click', cancelSelectedSeats);
+        cancelAllBtn.removeEventListener('click', cancelAllSeats); // 추가된 코드
     }
+}
+
+function cancelAllSeats() {
+    const confirmedSeats = JSON.parse(localStorage.getItem('confirmedSeats')) || [];
+    localStorage.removeItem('confirmedSeats');
+    confirmedSeats.forEach(seatIndex => {
+        const seat = seats[seatIndex];
+        seat.classList.remove('confirmed');
+    });
+    showConfirmMessage('모든 좌석이 취소되었습니다.');
+    updateSeatInfo();
 }
 
 function toggleCancelTarget() {
