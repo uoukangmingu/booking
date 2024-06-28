@@ -244,17 +244,14 @@
 }
 
 .seat.selected {
-  background-color: #05F258;
   animation: selected 0.5s ease-in-out;
 }
 
 .seat.confirmed {
-  background-color: #013440;
   animation: confirmed 0.5s ease-in-out;
 }
 
 .seat.cancel-target {
-  background-color: #FF0000;
   animation: cancel 0.5s ease-in-out;
 }
 
