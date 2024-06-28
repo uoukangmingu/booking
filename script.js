@@ -251,8 +251,11 @@ function updateSeatInfo() {
     const remainingSeats = seats.filter(seat => !seat.classList.contains('confirmed')).length;
     const totalSeats = seats.length;
     const totalAudience = totalSeats - remainingSeats;
+    const discountedSeatsCount = seats.filter(seat => seat.classList.contains('discounted')).length;
 
     document.getElementById('remainingSeats').textContent = remainingSeats;
     document.getElementById('totalSeats').textContent = totalSeats;
     document.getElementById('totalAudience').textContent = totalAudience;
+    document.getElementById('discountedSeatsCount').textContent = `(할인권 사용: ${discountedSeatsCount}석)`;
 }
+
