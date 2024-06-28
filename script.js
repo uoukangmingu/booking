@@ -70,11 +70,11 @@ async function confirmSelectedSeats() {
             <div class="buttons">
                 <button class="confirm-btn" disabled>
                     <div class="cooldown-bar"></div>
-                    확인
+                    사용
                 </button>
                 <button class="cancel-btn" disabled>
                     <div class="cooldown-bar"></div>
-                    취소
+                    미사용
                 </button>
             </div>
         `;
@@ -106,7 +106,7 @@ async function confirmSelectedSeats() {
                 const cooldownBars = discountPrompt.querySelectorAll('.cooldown-bar');
                 cooldownBars.forEach(bar => {
                     bar.style.width = '100%';
-                    bar.style.animation = 'cooldown 1s linear forwards';
+                    bar.style.animation = 'cooldown 0.9s linear forwards';
                 });
             };
 
@@ -118,7 +118,7 @@ async function confirmSelectedSeats() {
                 cancelBtn.disabled = false;
                 confirmBtn.querySelector('.cooldown-bar').style.animation = '';
                 cancelBtn.querySelector('.cooldown-bar').style.animation = '';
-            }, 1000);
+            }, 900);
         });
 
         const useDiscountResult = await useDiscount;
