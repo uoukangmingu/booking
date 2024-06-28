@@ -318,8 +318,26 @@
     width: 20px;
     height: 20px;
     margin-right: 10px;
+  transition: all 0.3s ease-in-out;
 }
 
 .legend-item span {
     font-size: 14px;
+}
+
+.legend-item .seat.available,
+.legend-item .seat.discounted {
+  animation: pulse 1s infinite; /* 애니메이션 추가 */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
