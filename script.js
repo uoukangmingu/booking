@@ -277,3 +277,11 @@ function updateSeatInfo() {
     document.getElementById('discountedSeatsCount').textContent = `(할인권 사용: ${discountedSeatsCount}석)`;
 }
 
+const stage = document.querySelector('.stage');
+
+stage.addEventListener('click', () => {
+    prohibitedSeats.forEach(seat => {
+        seat.classList.remove('prohibited');
+    });
+    prohibitedSeats = [];
+});
