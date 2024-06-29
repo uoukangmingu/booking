@@ -11,6 +11,7 @@ let cancelTargets = [];
 let isCancelContainerVisible = false;
 let discountedSeats = [];
 let discountedSeatsMap = {};
+let prohibitedSeats = [];
 
 function createSeats() {
     for (let i = 1; i <= 14 * 11; i++) {
@@ -48,20 +49,37 @@ window.addEventListener('load', () => {
 
 function toggleSeatSelection() {
     if (this.classList.contains('confirmed')) return;
-    this.classList.toggle('selected');
-    const index = selectedSeats.indexOf(this);
-    if (index === -1) {
-        selectedSeats.push(this);
+
+    if (event.ctrlKey) {
+        // Ctrl 키를 누른 상태에서 클릭한 경우
+        if (this.classList.contains('prohibited')) {
+            // 금지 좌석인 경우, 금지를 해제
+            this.classList.remove('prohibited');
+            prohibitedSeats = prohibitedSeats.filter(seat => seat !== this);
+        } else {
+            // 일반 좌석인 경우, 금지 좌석으로 설정
+            this.classList.add('prohibited');
+            prohibitedSeats.push(this);
+        }
     } else {
-        selectedSeats.splice(index, 1);
+        // 일반적인 좌석 선택/해제 로직
+        this.classList.toggle('selected');
+        const index = selectedSeats.indexOf(this);
+        if (index === -1) {
+            selectedSeats.push(this);
+        } else {
+            selectedSeats.splice(index, 1);
+        }
     }
 }
+
 
 async function confirmSelectedSeats() {
     const confirmedSeatIndices = [];
     const discountPrompt = document.getElementById('discountPrompt');
 
     for (const seat of selectedSeats) {
+        if (seat.classList.contains('prohibited')) continue;
         const seatIndex = seats.indexOf(seat);
         const seatRow = Math.ceil((seatIndex + 1) / 11);
         const seatCol = (seatIndex + 1) % 11 || 11;

@@ -344,3 +344,9 @@
     transform: scale(1);
   }
 }
+.seat.prohibited {
+    background-color: black;
+    color: white;
+    cursor: not-allowed;
+    pointer-events: none; /* 금지 좌석에 대한 클릭 이벤트 비활성화 */
+}
