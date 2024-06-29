@@ -266,8 +266,8 @@ createSeats();
 confirmBtn.addEventListener('click', confirmSelectedSeats);
 
 function updateSeatInfo() {
-    const remainingSeats = seats.filter(seat => !seat.classList.contains('confirmed')).length;
-    const totalSeats = seats.length;
+    const remainingSeats = seats.filter(seat => !seat.classList.contains('confirmed') && !seat.classList.contains('prohibited')).length;
+    const totalSeats = seats.length - prohibitedSeats.length;
     const totalAudience = totalSeats - remainingSeats;
     const discountedSeatsCount = seats.filter(seat => seat.classList.contains('discounted')).length;
 
