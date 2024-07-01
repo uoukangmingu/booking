@@ -310,31 +310,34 @@ zoomOutBtn.addEventListener('click', () => {
   }
 });
 
-// 전체화면 토글 함수
 function toggleFullScreen() {
-  if (!document.fullscreenElement) {
-    // 모바일 및 태블릿 장치 감지
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+  if (document.fullscreenElement) {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  } else {
     if (isMobile) {
-      // 세로 모드로 전환
-      screen.orientation.lock('portrait')
-        .then(() => {
-          document.documentElement.requestFullscreen();
-        })
-        .catch(err => {
-          console.error('전체화면 모드 전환 실패:', err.message);
-        });
+      try {
+        // 세로 모드로 전환
+        screen.orientation.lock('portrait-primary')
+          .then(() => {
+            return document.documentElement.requestFullscreen();
+          })
+          .catch(err => {
+            console.error('전체화면 모드 전환 실패:', err.message);
+          });
+      } catch (err) {
+        console.error('화면 방향 잠금 실패:', err.message);
+      }
     } else {
       // 데스크톱 환경에서는 기존 전체화면 모드 전환
       document.documentElement.requestFullscreen();
     }
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
   }
 }
+
 
 
 // 버튼 클릭 이벤트 리스너
