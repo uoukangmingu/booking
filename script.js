@@ -310,17 +310,39 @@ zoomOutBtn.addEventListener('click', () => {
   }
 });
 
-// 전체화면 토글 함수
-function toggleFullScreen() {
+// 전체화면 버튼 클릭 이벤트 핸들러
+const fullscreenBtn = document.getElementById('fullscreenBtn');
+fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+// 전체화면 모드 토글 함수
+function toggleFullscreen() {
   if (!document.fullscreenElement) {
+    // 전체화면 모드 진입
     document.documentElement.requestFullscreen();
   } else {
     if (document.exitFullscreen) {
+      // 전체화면 모드 종료
       document.exitFullscreen();
     }
   }
 }
 
-// 버튼 클릭 이벤트 리스너
-const fullscreenBtn = document.getElementById('fullscreenBtn');
-fullscreenBtn.addEventListener('click', toggleFullScreen);
+// 화면 방향 변경 이벤트 핸들러
+window.addEventListener('orientationchange', handleOrientationChange);
+
+// 화면 방향 변경 시 전체화면 모드 조정
+function handleOrientationChange() {
+  if (document.fullscreenElement) {
+    // 전체화면 모드일 때만 화면 방향 조정
+    const orientation = window.orientation;
+    
+    if (orientation === 0 || orientation === 180) {
+      // 세로 모드
+      screen.orientation.lock('portrait');
+    } else if (orientation === 90 || orientation === -90) {
+      // 가로 모드
+      screen.orientation.lock('landscape');
+    }
+  }
+}
+
