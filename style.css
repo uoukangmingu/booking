@@ -534,3 +534,14 @@ body.dark-mode .legend {
   background-color: #555;
   color: #fff;
 }
+
+
+.seat.reserving {
+  background-color: #FFFF00; /* 예약 중인 좌석 색상 */
+  color: #000000; /* 예약 중인 좌석 텍스트 색상 */
+}
+
+.seat.reserved {
+  background-color: #FFD700; /* 예약자 좌석 색상 */
+  color: #000000; /* 예약자 좌석 텍스트 색상 */
+}

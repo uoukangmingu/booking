@@ -333,3 +333,47 @@ darkModeBtn.addEventListener('click', toggleDarkMode);
 function toggleDarkMode() {
   body.classList.toggle('dark-mode');
 }
+
+
+
+let isReserving = false;
+let reservingSeats = [];
+
+seats.forEach(seat => {
+  seat.addEventListener('click', handleSeatClick);
+});
+
+function handleSeatClick(e) {
+  const seat = e.target;
+  if (isReserving && e.shiftKey) {
+    if (!seat.classList.contains('reserved') && !seat.classList.contains('confirmed')) {
+      seat.classList.add('reserving');
+      reservingSeats.push(seat);
+    }
+  } else {
+    reservingSeats.forEach(reservingSeat => {
+      reservingSeat.classList.remove('reserving');
+      reservingSeat.classList.add('reserved');
+    });
+    reservingSeats = [];
+    isReserving = false;
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.shiftKey) {
+    isReserving = true;
+  }
+});
+
+document.addEventListener('keyup', e => {
+  if (e.key === 'Shift') {
+    isReserving = false;
+    reservingSeats.forEach(reservingSeat => {
+      reservingSeat.classList.remove('reserving');
+      reservingSeat.classList.add('reserved');
+    });
+    reservingSeats = [];
+  }
+});
+
