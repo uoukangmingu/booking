@@ -16,6 +16,7 @@
     align-items: center;
     margin-bottom: 15px;
     border-radius: 10px 10px 30px 30px;
+    margin-top: 10px; 
 }
 
 .seat-container {
@@ -425,7 +426,7 @@
   .audience-count, .seat-info, .legend {
     position: static;
     margin-top: 10px; 
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
   .container {
     transform-origin: 50% 5%; /* 축소 기준점을 상단 가운데로 설정 */
