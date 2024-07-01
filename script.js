@@ -309,3 +309,18 @@ zoomOutBtn.addEventListener('click', () => {
     container.style.transform = `scale(${currentZoom})`;
   }
 });
+
+// 전체화면 토글 함수
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+
+// 버튼 클릭 이벤트 리스너
+const fullscreenBtn = document.getElementById('fullscreenBtn');
+fullscreenBtn.addEventListener('click', toggleFullScreen);

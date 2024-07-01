@@ -235,7 +235,7 @@
     color: #333;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
-    border-radius: 20px;
+    border-radius: 15px;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.5);
 }
 
@@ -436,4 +436,26 @@
 html, body {
     height: 100%;
     margin: 0;
+}
+
+.fullscreen-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+#fullscreenBtn {
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#fullscreenBtn:hover {
+  background-color: #555;
 }
