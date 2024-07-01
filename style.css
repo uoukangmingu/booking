@@ -329,10 +329,10 @@
 
 .legend {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 5px;
+    right: 5px;
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -415,4 +415,36 @@
 
 .zoom-controls button:active {
     box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .audience-count, .seat-info {
+    position: static;
+    margin-bottom: 10px;
+  }
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    min-height: 100%;
+    margin-bottom: -50px; /* footer 높이만큼 음수 값 설정 */
+}
+
+.container:after {
+    content: "";
+    display: block;
+    height: 50px; /* footer 높이와 동일한 값 */
+}
+
+.footer {
+    height: 100px; /* footer 높이 설정 */
+    color: #000000;
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+    line-height: 100px; /* 수직 가운데 정렬을 위해 높이와 동일한 값 */
 }
