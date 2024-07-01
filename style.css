@@ -392,6 +392,7 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 20px; 
 }
 
 .zoom-controls button {
@@ -423,7 +424,8 @@
 @media (max-width: 1270px) {
   .audience-count, .seat-info, .legend {
     position: static;
-    margin-bottom: 10px;
+    margin-top: 10px; 
+    margin-bottom: 20px;
   }
   .container {
     transform-origin: 50% 5%; /* 축소 기준점을 상단 가운데로 설정 */
