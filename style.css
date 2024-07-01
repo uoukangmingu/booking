@@ -427,27 +427,3 @@
   }
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-.container {
-    min-height: 100%;
-    margin-bottom: -50px; /* footer 높이만큼 음수 값 설정 */
-}
-
-.container:after {
-    content: "";
-    display: block;
-    height: 50px; /* footer 높이와 동일한 값 */
-}
-
-.footer {
-    height: 100px; /* footer 높이 설정 */
-    color: #000000;
-    text-align: center;
-    font-size: 150%;
-    font-weight: bold;
-    line-height: 100px; /* 수직 가운데 정렬을 위해 높이와 동일한 값 */
-}
