@@ -325,8 +325,6 @@ function toggleFullScreen() {
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 fullscreenBtn.addEventListener('click', toggleFullScreen);
 
-const container = document.querySelector('.container');
-
 function handleOrientationChange() {
   const orientation = window.orientation;
 
