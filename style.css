@@ -420,13 +420,16 @@
     box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.5);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1270px) {
   .audience-count, .seat-info, .legend {
     position: static;
     margin-bottom: 10px;
   }
+  .container {
+    transform-origin: 50% 5%; /* 축소 기준점을 상단 가운데로 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
+  }
 }
-
 html, body {
     height: 100%;
     margin: 0;
