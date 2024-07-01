@@ -432,6 +432,16 @@
     transform-origin: 50% 5%; /* 축소 기준점을 상단 가운데로 설정 */
     margin: 0 auto; /* 가운데 정렬 */
   }
+  .fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+    transform: rotate(90deg) !important;
+    transform-origin: top left !important;
+    overflow-x: hidden !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
 }
 html, body {
     height: 100%;
