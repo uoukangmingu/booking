@@ -324,3 +324,12 @@ function toggleFullScreen() {
 // 버튼 클릭 이벤트 리스너
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 fullscreenBtn.addEventListener('click', toggleFullScreen);
+
+const darkModeBtn = document.getElementById('darkModeBtn');
+const body = document.body;
+
+darkModeBtn.addEventListener('click', toggleDarkMode);
+
+function toggleDarkMode() {
+  body.classList.toggle('dark-mode');
+}

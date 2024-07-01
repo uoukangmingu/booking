@@ -12,7 +12,7 @@
     <h3>좌석 상태</h3>
     <div class="legend-item">
         <div class="seat available"></div>
-        <span>예약 가능</span>
+        <span>선택 가능</span>
     </div>
     <div class="legend-item">
         <div class="seat confirmed"></div>
@@ -49,13 +49,16 @@
     </div>
 </div>
 <div class="zoom-controls">
+<button id="darkModeBtn">
+  <img src="dark-mode-icon.png" alt="Dark Mode Icon">
+</button>
+<button id="fullscreenBtn">
+  <img src="fullscreen-icon.png" alt="Full Screen Icon">
+</button>
     <button id="zoomOutBtn">-</button>
     <button id="zoomInBtn">+</button>
 </div>
 <div id="confirmMessage"></div>
-<div class="fullscreen-toggle">
-  <button id="fullscreenBtn">전체화면</button>
-</div>
 </div>
 <div id="discountPrompt" class="prompt"></div>
 <script src="script.js"></script>

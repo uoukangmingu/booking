@@ -73,7 +73,7 @@
 #cancelBtn {
     padding: 10px 20px;
     font-size: 150%;
-    background-color: #FF0000;
+    background-color: #FF4242;
     color: #000000;
     font-weight: bold;
 }
@@ -137,7 +137,7 @@
     padding: 10px 20px;
     font-size: 150%;
     margin-left: 10px;
-    background-color: #FF0000;
+    background-color: #FF4242;
     color: #000000;
     font-weight: bold;
 }
@@ -438,24 +438,99 @@ html, body {
     margin: 0;
 }
 
-.fullscreen-toggle {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 100;
-}
-
-#fullscreenBtn {
+#darkModeBtn, #fullscreenBtn {
   font-size: 16px;
   padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 10px;
 }
+
+#darkModeBtn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  width: 40px; /* 이미지 크기에 맞게 조정 */
+  height: 40px; /* 이미지 크기에 맞게 조정 */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#darkModeBtn img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+#darkModeBtn:hover {
+  background-color: #555;
+}
+
+#fullscreenBtn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  width: 40px; /* 이미지 크기에 맞게 조정 */
+  height: 40px; /* 이미지 크기에 맞게 조정 */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#fullscreenBtn img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 
 #fullscreenBtn:hover {
   background-color: #555;
+}
+
+/* 다크 모드 스타일 */
+body.dark-mode {
+  background-color: #000;
+  color: #000;
+}
+
+body.dark-mode .seat.available {
+  background-color: #ccc;
+  color: #000;
+}
+
+body.dark-mode .seat.confirmed {
+  background-color: #0DB2D5;
+  color: #000;
+}
+
+body.dark-mode .seat.discounted {
+  background-color: #F9A5EE;
+  color: #000;
+}
+
+body.dark-mode .seat.selected {
+  background-color: #05F258;
+  color: #000;
+}
+
+body.dark-mode .seat.cancel-target {
+  background-color: #FA9896;
+  color: #000;
+}
+
+body.dark-mode .stage {
+  background-color: #555;
+  color: #fff;
+}
+
+body.dark-mode .seat-info,
+body.dark-mode .audience-count,
+body.dark-mode .legend {
+  background-color: #555;
+  color: #fff;
 }
