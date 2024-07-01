@@ -59,6 +59,20 @@
     <button id="zoomInBtn">+</button>
 </div>
 <div id="confirmMessage"></div>
+
+<div id="reservationInfoModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>예약자 정보 입력</h2>
+    <form id="reservationInfoForm">
+      <label for="phoneLastFour">휴대전화 뒷번호 4자리:</label>
+      <input type="text" id="phoneLastFour" maxlength="4" required>
+      <button type="submit">확인</button>
+    </form>
+    <div id="reservedPhoneNumbers"></div>
+  </div>
+</div>
+
 </div>
 <div id="discountPrompt" class="prompt"></div>
 <script src="script.js"></script>

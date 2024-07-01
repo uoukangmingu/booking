@@ -377,3 +377,86 @@ document.addEventListener('keyup', e => {
   }
 });
 
+
+
+// 단축키 이벤트 핸들러
+document.addEventListener('keydown', function(event) {
+  if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'f') {
+    document.getElementById('reservationInfoModal').style.display = 'block';
+  }
+});
+
+// 예약자 정보 입력 모달 닫기 버튼 클릭 이벤트 핸들러
+var closeButtons = document.getElementsByClassName('close');
+for (var i = 0; i < closeButtons.length; i++) {
+  closeButtons[i].addEventListener('click', function() {
+    document.getElementById('reservationInfoModal').style.display = 'none';
+  });
+}
+
+// 예약자 정보 입력 모달 외부 클릭 시 닫기
+window.addEventListener('click', function(event) {
+  var modal = document.getElementById('reservationInfoModal');
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// 예약자 정보 저장 배열
+var reservedPhoneNumbers = [];
+
+// 예약자 정보 입력 폼 제출 이벤트 핸들러
+document.getElementById('reservationInfoForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // 기본 폼 제출 동작 방지
+
+  // 휴대전화 뒷번호 4자리 입력값 가져오기
+  var phoneLastFour = document.getElementById('phoneLastFour').value;
+
+  // 유효성 검사 (숫자 4자리인지 확인)
+  if (phoneLastFour.length !== 4 || isNaN(phoneLastFour)) {
+    alert('휴대전화 뒷번호 4자리를 정확히 입력해주세요.');
+    return;
+  }
+
+  // 예약자 정보 저장
+  reservedPhoneNumbers.push(phoneLastFour);
+
+  // 예약자 정보 표시
+  displayReservedPhoneNumbers();
+
+  // 입력값 초기화
+  document.getElementById('phoneLastFour').value = '';
+});
+
+// 예약자 정보 표시 함수
+function displayReservedPhoneNumbers() {
+  var reservedPhoneNumbersDiv = document.getElementById('reservedPhoneNumbers');
+  reservedPhoneNumbersDiv.innerHTML = '';
+
+  for (var i = 0; i < reservedPhoneNumbers.length; i++) {
+    var phoneNumberDiv = document.createElement('div');
+    phoneNumberDiv.textContent = `${i + 1}. ${reservedPhoneNumbers[i]}`;
+    reservedPhoneNumbersDiv.appendChild(phoneNumberDiv);
+  }
+}
+
+// 예약자 정보 입력 모달 닫기 버튼 클릭 이벤트 핸들러
+var closeButton = document.querySelector('#reservationInfoModal .close');
+closeButton.addEventListener('click', function() {
+  document.getElementById('reservationInfoModal').style.display = 'none';
+});
+
+// 예약자 정보 입력 모달 외부 클릭 시 닫기
+window.addEventListener('click', function(event) {
+  var modal = document.getElementById('reservationInfoModal');
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+});
+
+
+// 예약자 정보 처리 함수 (추후 구현 필요)
+function processReservationInfo(phoneLastFour) {
+  // 예약자 정보 처리 로직 구현
+  console.log('예약자 휴대전화 뒷번호:', phoneLastFour);
+}
