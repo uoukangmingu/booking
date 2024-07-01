@@ -294,7 +294,7 @@ const container = document.querySelector('.container');
 let currentZoom = 1;
 const maxZoom = 2;
 const minZoom = 0.5;
-const zoomStep = 0.1;
+const zoomStep = 0.05;
 
 zoomInBtn.addEventListener('click', () => {
   if (currentZoom < maxZoom) {
