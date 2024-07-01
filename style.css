@@ -71,7 +71,10 @@
 
 #cancelBtn {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 150%;
+    background-color: #FF0000;
+    color: #000000;
+    font-weight: bold;
 }
 
 #confirmMessage {
@@ -131,8 +134,11 @@
 
 #cancelAllBtn {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 150%;
     margin-left: 10px;
+    background-color: #FF0000;
+    color: #000000;
+    font-weight: bold;
 }
 
 .seat.discounted {
@@ -220,12 +226,40 @@
 
 
 .button-container button {
-  transition: all 0.3s ease-in-out;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    background-color: #e0e0e0;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    border-radius: 20px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.5);
+}
+
+.button-container button:hover {
+    background-color: #d0d0d0;
+    transform: scale(1.05);
+}
+
+.button-container button:active {
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.5);
+}
+
+#confirmBtn {
+    background-color: #05F258;
+    color: #000000;
+    font-size: 150%;
+    font-weight: bold;
 }
 
 #confirmBtn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 5px 10px rgba(0, 255, 0, 0.2);
+    background-color: #04D052;
+}
+
+#confirmBtn:active {
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.5);
 }
 
 #cancelBtn:hover,
@@ -349,4 +383,36 @@
     color: #ccc;
     cursor: not-allowed;
     pointer-events: none; /* 금지 좌석에 대한 클릭 이벤트 비활성화 */
+}
+
+.zoom-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.zoom-controls button {
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    border: none;
+    background-color: #e0e0e0;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    border-radius: 50%;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zoom-controls button:hover {
+    background-color: #d0d0d0;
+    transform: scale(1.1);
+}
+
+.zoom-controls button:active {
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.5);
 }

@@ -285,3 +285,27 @@ stage.addEventListener('click', () => {
     });
     prohibitedSeats = [];
 });
+
+
+const zoomInBtn = document.getElementById('zoomInBtn');
+const zoomOutBtn = document.getElementById('zoomOutBtn');
+const container = document.querySelector('.container');
+
+let currentZoom = 1;
+const maxZoom = 2;
+const minZoom = 0.5;
+const zoomStep = 0.1;
+
+zoomInBtn.addEventListener('click', () => {
+  if (currentZoom < maxZoom) {
+    currentZoom += zoomStep;
+    container.style.transform = `scale(${currentZoom})`;
+  }
+});
+
+zoomOutBtn.addEventListener('click', () => {
+  if (currentZoom > minZoom) {
+    currentZoom -= zoomStep;
+    container.style.transform = `scale(${currentZoom})`;
+  }
+});
