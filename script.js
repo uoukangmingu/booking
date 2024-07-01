@@ -324,3 +324,20 @@ function toggleFullScreen() {
 // 버튼 클릭 이벤트 리스너
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 fullscreenBtn.addEventListener('click', toggleFullScreen);
+
+const container = document.querySelector('.container');
+
+function handleOrientationChange() {
+  const orientation = window.orientation;
+
+  if (orientation === 0 || orientation === 180) {
+    // 세로 모드
+    container.style.transform = 'scale(1)';
+  } else {
+    // 가로 모드
+    container.style.transform = 'scale(0.6) rotate(90deg)';
+  }
+}
+
+window.addEventListener('orientationchange', handleOrientationChange);
+
