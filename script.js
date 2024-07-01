@@ -312,17 +312,11 @@ zoomOutBtn.addEventListener('click', () => {
 
 // 전체화면 토글 함수
 function toggleFullScreen() {
-  const container = document.querySelector('.container');
-
   if (!document.fullscreenElement) {
-    container.requestFullscreen();
-    if (window.innerWidth <= 1270) {
-      container.classList.add('fullscreen');
-    }
+    document.documentElement.requestFullscreen();
   } else {
     if (document.exitFullscreen) {
       document.exitFullscreen();
-      container.classList.remove('fullscreen');
     }
   }
 }
