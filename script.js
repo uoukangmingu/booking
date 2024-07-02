@@ -428,6 +428,7 @@ document.getElementById('reservationInfoForm').addEventListener('submit', functi
   document.getElementById('phoneLastFour').value = '';
 });
 
+
 // 예약자 정보 표시 함수
 function displayReservedPhoneNumbers() {
   var reservedPhoneNumbersDiv = document.getElementById('reservedPhoneNumbers');
@@ -435,10 +436,32 @@ function displayReservedPhoneNumbers() {
 
   for (var i = 0; i < reservedPhoneNumbers.length; i++) {
     var phoneNumberDiv = document.createElement('div');
-    phoneNumberDiv.textContent = `${i + 1}. ${reservedPhoneNumbers[i]}`;
+    phoneNumberDiv.classList.add('phone-number');
+    phoneNumberDiv.dataset.index = i; // 인덱스 정보 추가
+
+    var phoneNumberText = document.createElement('span');
+    phoneNumberText.textContent = `${i + 1}. ${reservedPhoneNumbers[i]}`;
+
+    var deleteButton = document.createElement('span');
+    deleteButton.classList.add('delete-button');
+    deleteButton.textContent = 'x';
+    deleteButton.addEventListener('click', function() {
+      deleteReservedPhoneNumber(this.parentElement.dataset.index);
+    });
+
+    phoneNumberDiv.appendChild(phoneNumberText);
+    phoneNumberDiv.appendChild(deleteButton);
     reservedPhoneNumbersDiv.appendChild(phoneNumberDiv);
   }
 }
+
+// 예약자 정보 삭제 함수
+function deleteReservedPhoneNumber(index) {
+  reservedPhoneNumbers.splice(index, 1);
+  displayReservedPhoneNumbers();
+}
+
+
 
 // 예약자 정보 입력 모달 닫기 버튼 클릭 이벤트 핸들러
 var closeButton = document.querySelector('#reservationInfoModal .close');

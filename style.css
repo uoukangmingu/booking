@@ -636,3 +636,25 @@ body.dark-mode .legend {
   color: black;
   text-decoration: none;
 }
+
+/* 예약자 정보 표시 영역 스타일 */
+#reservedPhoneNumbers {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+#reservedPhoneNumbers .phone-number {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#reservedPhoneNumbers .delete-button {
+  color: #aaa;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#reservedPhoneNumbers .delete-button:hover {
+  color: #888;
+}
