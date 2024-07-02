@@ -612,15 +612,17 @@ body.dark-mode .legend {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 40%);
 }
 
 #reservationInfoModal .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 10% auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: none;
   width: 30%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 #reservationInfoModal .close {
@@ -636,6 +638,8 @@ body.dark-mode .legend {
   color: black;
   text-decoration: none;
 }
+
+
 
 /* 예약자 정보 표시 영역 스타일 */
 #reservedPhoneNumbers {
@@ -657,4 +661,16 @@ body.dark-mode .legend {
 
 #reservedPhoneNumbers .delete-button:hover {
   color: #888;
+}
+
+
+/* 예약자 정보 입력 폼 스타일 */
+#reservationInfoForm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#reservationInfoForm button {
+  margin-left: 0.5px;
 }

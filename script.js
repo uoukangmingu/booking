@@ -345,7 +345,7 @@ seats.forEach(seat => {
 
 function handleSeatClick(e) {
   const seat = e.target;
-  if (isReserving && e.shiftKey) {
+  if (isReserving && e.altKey) {
     if (!seat.classList.contains('reserved') && !seat.classList.contains('confirmed')) {
       seat.classList.add('reserving');
       reservingSeats.push(seat);
@@ -361,13 +361,13 @@ function handleSeatClick(e) {
 }
 
 document.addEventListener('keydown', e => {
-  if (e.shiftKey) {
+  if (e.altKey) {
     isReserving = true;
   }
 });
 
 document.addEventListener('keyup', e => {
-  if (e.key === 'Shift') {
+  if (e.key === 'Alt') {
     isReserving = false;
     reservingSeats.forEach(reservingSeat => {
       reservingSeat.classList.remove('reserving');
@@ -428,7 +428,6 @@ document.getElementById('reservationInfoForm').addEventListener('submit', functi
   document.getElementById('phoneLastFour').value = '';
 });
 
-
 // 예약자 정보 표시 함수
 function displayReservedPhoneNumbers() {
   var reservedPhoneNumbersDiv = document.getElementById('reservedPhoneNumbers');
@@ -460,6 +459,14 @@ function deleteReservedPhoneNumber(index) {
   reservedPhoneNumbers.splice(index, 1);
   displayReservedPhoneNumbers();
 }
+
+// 예약자 정보 전체 삭제 버튼 클릭 이벤트 핸들러
+var clearButton = document.getElementById('clearReservationsButton');
+clearButton.addEventListener('click', function() {
+  reservedPhoneNumbers = [];
+  displayReservedPhoneNumbers();
+});
+
 
 
 
