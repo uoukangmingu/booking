@@ -403,7 +403,7 @@ window.addEventListener('click', function(event) {
 });
 
 // 예약자 정보 저장 배열
-var reservedPhoneNumbers = [];
+var reservedPhoneNumbers = JSON.parse(localStorage.getItem('reservedPhoneNumbers')) || [];
 
 // 예약자 정보 입력 폼 제출 이벤트 핸들러
 document.getElementById('reservationInfoForm').addEventListener('submit', function(event) {
@@ -420,6 +420,7 @@ document.getElementById('reservationInfoForm').addEventListener('submit', functi
 
   // 예약자 정보 저장
   reservedPhoneNumbers.push(phoneLastFour);
+  localStorage.setItem('reservedPhoneNumbers', JSON.stringify(reservedPhoneNumbers));
 
   // 예약자 정보 표시
   displayReservedPhoneNumbers();
@@ -457,17 +458,22 @@ function displayReservedPhoneNumbers() {
 // 예약자 정보 삭제 함수
 function deleteReservedPhoneNumber(index) {
   reservedPhoneNumbers.splice(index, 1);
+  localStorage.setItem('reservedPhoneNumbers', JSON.stringify(reservedPhoneNumbers));
   displayReservedPhoneNumbers();
 }
 
-// 예약자 정보 전체 삭제 버튼 클릭 이벤트 핸들러
+// 초기화 버튼 클릭 이벤트 핸들러
 var clearButton = document.getElementById('clearReservationsButton');
 clearButton.addEventListener('click', function() {
   reservedPhoneNumbers = [];
+  localStorage.removeItem('reservedPhoneNumbers');
   displayReservedPhoneNumbers();
 });
 
-
+// 페이지 로드 시 예약자 정보 불러오기
+window.addEventListener('load', function() {
+  displayReservedPhoneNumbers();
+});
 
 
 // 예약자 정보 입력 모달 닫기 버튼 클릭 이벤트 핸들러
