@@ -334,51 +334,6 @@ function toggleDarkMode() {
   body.classList.toggle('dark-mode');
 }
 
-
-
-let isReserving = false;
-let reservingSeats = [];
-
-seats.forEach(seat => {
-  seat.addEventListener('click', handleSeatClick);
-});
-
-function handleSeatClick(e) {
-  const seat = e.target;
-  if (isReserving && e.altKey) {
-    if (!seat.classList.contains('reserved') && !seat.classList.contains('confirmed')) {
-      seat.classList.add('reserving');
-      reservingSeats.push(seat);
-    }
-  } else {
-    reservingSeats.forEach(reservingSeat => {
-      reservingSeat.classList.remove('reserving');
-      reservingSeat.classList.add('reserved');
-    });
-    reservingSeats = [];
-    isReserving = false;
-  }
-}
-
-document.addEventListener('keydown', e => {
-  if (e.altKey) {
-    isReserving = true;
-  }
-});
-
-document.addEventListener('keyup', e => {
-  if (e.key === 'Alt') {
-    isReserving = false;
-    reservingSeats.forEach(reservingSeat => {
-      reservingSeat.classList.remove('reserving');
-      reservingSeat.classList.add('reserved');
-    });
-    reservingSeats = [];
-  }
-});
-
-
-
 // 단축키 이벤트 핸들러
 document.addEventListener('keydown', function(event) {
   if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'f') {
@@ -504,35 +459,4 @@ window.addEventListener('click', function(event) {
 function processReservationInfo(phoneLastFour) {
   // 예약자 정보 처리 로직 구현
   console.log('예약자 휴대전화 뒷번호:', phoneLastFour);
-}
-
-function getTotalReservedPeople() {
-  let total = 0;
-  const reservedInfo = JSON.parse(localStorage.getItem('reservedInfo')) || [];
-  reservedInfo.forEach(info => {
-    total += parseInt(info.people);
-  });
-  return total;
-}
-function handleSeatClick(e) {
-  const seat = e.target;
-  const totalReservedPeople = getTotalReservedPeople();
-
-  if (isReserving && e.altKey) {
-    if (!seat.classList.contains('reserved') && !seat.classList.contains('confirmed')) {
-      if (reservingSeats.length < totalReservedPeople) {
-        seat.classList.add('reserving');
-        reservingSeats.push(seat);
-      } else {
-        alert(`임시 예약 가능한 좌석 수는 ${totalReservedPeople}석입니다.`);
-      }
-    }
-  } else {
-    reservingSeats.forEach(reservingSeat => {
-      reservingSeat.classList.remove('reserving');
-      reservingSeat.classList.add('reserved');
-    });
-    reservingSeats = [];
-    isReserving = false;
-  }
 }

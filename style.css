@@ -589,19 +589,6 @@ body.dark-mode .legend {
   color: #fff;
 }
 
-
-.seat.reserving {
-  background-color: #FFFF00; /* 예약 중인 좌석 색상 */
-  color: #000000; /* 예약 중인 좌석 텍스트 색상 */
-}
-
-.seat.reserved {
-  background-color: #FFD700; /* 예약자 좌석 색상 */
-  color: #000000; /* 예약자 좌석 텍스트 색상 */
-}
-
-
-
 /* 예약자 정보 입력 모달 스타일 */
 #reservationInfoModal {
   display: none;
@@ -719,4 +706,9 @@ body.dark-mode .legend {
 #reservationInfoForm .reset-btn:hover {
   background-color: #d32f2f;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.seat.reserved {
+  background-color: yellow;
+  pointer-events: none; /* 클릭 이벤트 비활성화 */
 }
