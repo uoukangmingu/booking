@@ -32,6 +32,8 @@ window.addEventListener('load', () => {
     const storedDiscountedSeatsMap = JSON.parse(localStorage.getItem('discountedSeatsMap')) || {};
     discountedSeatsMap = storedDiscountedSeatsMap;
 
+    const starredSeats = JSON.parse(localStorage.getItem('starredSeats')) || [];
+
     confirmedSeats.forEach(seatIndex => {
         const seat = seats[seatIndex];
         const seatRow = Math.ceil((seatIndex + 1) / 11);
@@ -42,9 +44,20 @@ window.addEventListener('load', () => {
             seat.classList.add('discounted');
         }
     });
+
+    starredSeats.forEach(seatIndex => {
+        const seat = seats[seatIndex];
+        const icon = document.getElementById('starIcon').cloneNode(true);
+        icon.classList.add('star-icon');
+        icon.style.display = 'block';
+        seat.appendChild(icon);
+        seat.classList.add('starred');
+    });
+
     toggleCancelContainer();
     updateSeatInfo();
 });
+
 
 function toggleSeatSelection() {
     if (this.classList.contains('confirmed')) return;
@@ -85,11 +98,17 @@ function toggleSeatSelection() {
 
 async function confirmSelectedSeats() {
     const confirmedSeatIndices = [];
+    const starredSeatIndices = [];
     const discountPrompt = document.getElementById('discountPrompt');
 
     for (const seat of selectedSeats) {
         if (seat.classList.contains('prohibited')) continue;
         const seatIndex = seats.indexOf(seat);
+        confirmedSeatIndices.push(seatIndex);
+
+        if (seat.classList.contains('starred')) {
+            starredSeatIndices.push(seatIndex);
+        }
         const seatRow = Math.ceil((seatIndex + 1) / 11);
         const seatCol = (seatIndex + 1) % 11 || 11;
         discountPrompt.innerHTML = `
@@ -164,6 +183,7 @@ async function confirmSelectedSeats() {
 
     localStorage.setItem('confirmedSeats', JSON.stringify(updatedConfirmedSeats));
     localStorage.setItem('discountedSeatsMap', JSON.stringify(discountedSeatsMap));
+    localStorage.setItem('starredSeats', JSON.stringify(starredSeatIndices));
 
     selectedSeats.forEach(seat => {
         const seatIndex = seats.indexOf(seat);
@@ -176,6 +196,9 @@ async function confirmSelectedSeats() {
 
     selectedSeats = [];
     showConfirmMessage('선택한 좌석이 확정되었습니다.');
+    selectedSeats.length = 0;
+    prohibitedSeats.length = 0;
+    toggleCancelContainer();
     updateSeatInfo();
 }
 
@@ -344,9 +367,16 @@ function toggleDarkMode() {
 }
 
 // 단축키 이벤트 핸들러
+// 예약자 정보 입력 모달 열기 이벤트 핸들러
 document.addEventListener('keydown', function(event) {
   if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'f') {
-    document.getElementById('reservationInfoModal').style.display = 'block';
+    var modal = document.getElementById('reservationInfoModal');
+    modal.style.display = 'block';
+    
+    // 예약자 정보 불러오기 및 표시
+    var storedReservedInfo = JSON.parse(localStorage.getItem('reservedInfo')) || [];
+    reservedInfo = storedReservedInfo;
+    displayReservedInfo();
   }
 });
 
@@ -449,6 +479,7 @@ window.addEventListener('load', function() {
 });
 
 
+
 // 예약자 정보 입력 모달 닫기 버튼 클릭 이벤트 핸들러
 var closeButton = document.querySelector('#reservationInfoModal .close');
 closeButton.addEventListener('click', function() {
@@ -469,4 +500,3 @@ function processReservationInfo(phoneLastFour) {
   // 예약자 정보 처리 로직 구현
   console.log('예약자 휴대전화 뒷번호:', phoneLastFour);
 }
-
