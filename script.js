@@ -403,7 +403,7 @@ window.addEventListener('click', function(event) {
 });
 
 // 예약자 정보 저장 배열
-var reservedPhoneNumbers = JSON.parse(localStorage.getItem('reservedPhoneNumbers')) || [];
+var reservedInfo = JSON.parse(localStorage.getItem('reservedInfo')) || [];
 
 // 예약자 정보 입력 폼 제출 이벤트 핸들러
 document.getElementById('reservationInfoForm').addEventListener('submit', function(event) {
@@ -412,67 +412,76 @@ document.getElementById('reservationInfoForm').addEventListener('submit', functi
   // 휴대전화 뒷번호 4자리 입력값 가져오기
   var phoneLastFour = document.getElementById('phoneLastFour').value;
 
+  // 인원 수 입력값 가져오기
+  var numPeople = document.getElementById('numPeople').value;
+
   // 유효성 검사 (숫자 4자리인지 확인)
-  if (phoneLastFour.length !== 4 || isNaN(phoneLastFour)) {
-    alert('휴대전화 뒷번호 4자리를 정확히 입력해주세요.');
+  if (phoneLastFour.length !== 4 || isNaN(phoneLastFour) || isNaN(numPeople) || numPeople < 1) {
+    alert('휴대전화 뒷번호 4자리와 인원 수를 정확히 입력해주세요.');
     return;
   }
 
   // 예약자 정보 저장
-  reservedPhoneNumbers.push(phoneLastFour);
-  localStorage.setItem('reservedPhoneNumbers', JSON.stringify(reservedPhoneNumbers));
+  reservedInfo.push({ phone: phoneLastFour, people: numPeople });
+  localStorage.setItem('reservedInfo', JSON.stringify(reservedInfo));
 
   // 예약자 정보 표시
-  displayReservedPhoneNumbers();
+  displayReservedInfo();
 
   // 입력값 초기화
   document.getElementById('phoneLastFour').value = '';
+  document.getElementById('numPeople').value = '';
 });
 
 // 예약자 정보 표시 함수
-function displayReservedPhoneNumbers() {
-  var reservedPhoneNumbersDiv = document.getElementById('reservedPhoneNumbers');
-  reservedPhoneNumbersDiv.innerHTML = '';
+function displayReservedInfo() {
+  var reservedInfoDiv = document.getElementById('reservedPhoneNumbers');
+  reservedInfoDiv.innerHTML = '';
 
-  for (var i = 0; i < reservedPhoneNumbers.length; i++) {
-    var phoneNumberDiv = document.createElement('div');
-    phoneNumberDiv.classList.add('phone-number');
-    phoneNumberDiv.dataset.index = i; // 인덱스 정보 추가
+  for (var i = 0; i < reservedInfo.length; i++) {
+    var infoDiv = document.createElement('div');
+    infoDiv.classList.add('reserved-info');
+    infoDiv.dataset.index = i; // 인덱스 정보 추가
 
     var phoneNumberText = document.createElement('span');
-    phoneNumberText.textContent = `${i + 1}. ${reservedPhoneNumbers[i]}`;
+    phoneNumberText.textContent = `${i + 1}. ${reservedInfo[i].phone} (${reservedInfo[i].people}명)`;
 
     var deleteButton = document.createElement('span');
     deleteButton.classList.add('delete-button');
     deleteButton.textContent = 'x';
     deleteButton.addEventListener('click', function() {
-      deleteReservedPhoneNumber(this.parentElement.dataset.index);
+      deleteReservedInfo(this.parentElement.dataset.index);
     });
 
-    phoneNumberDiv.appendChild(phoneNumberText);
-    phoneNumberDiv.appendChild(deleteButton);
-    reservedPhoneNumbersDiv.appendChild(phoneNumberDiv);
+    infoDiv.appendChild(phoneNumberText);
+    infoDiv.appendChild(deleteButton);
+    reservedInfoDiv.appendChild(infoDiv);
   }
 }
 
+
+
 // 예약자 정보 삭제 함수
-function deleteReservedPhoneNumber(index) {
-  reservedPhoneNumbers.splice(index, 1);
-  localStorage.setItem('reservedPhoneNumbers', JSON.stringify(reservedPhoneNumbers));
-  displayReservedPhoneNumbers();
+function deleteReservedInfo(index) {
+  reservedInfo.splice(index, 1);
+  localStorage.setItem('reservedInfo', JSON.stringify(reservedInfo));
+  displayReservedInfo();
 }
 
 // 초기화 버튼 클릭 이벤트 핸들러
 var clearButton = document.getElementById('clearReservationsButton');
 clearButton.addEventListener('click', function() {
-  reservedPhoneNumbers = [];
-  localStorage.removeItem('reservedPhoneNumbers');
-  displayReservedPhoneNumbers();
+  reservedInfo = [];
+  localStorage.removeItem('reservedInfo');
+  displayReservedInfo();
 });
+
 
 // 페이지 로드 시 예약자 정보 불러오기
 window.addEventListener('load', function() {
-  displayReservedPhoneNumbers();
+  var storedReservedInfo = JSON.parse(localStorage.getItem('reservedInfo')) || [];
+  reservedInfo = storedReservedInfo;
+  displayReservedInfo();
 });
 
 
@@ -495,4 +504,35 @@ window.addEventListener('click', function(event) {
 function processReservationInfo(phoneLastFour) {
   // 예약자 정보 처리 로직 구현
   console.log('예약자 휴대전화 뒷번호:', phoneLastFour);
+}
+
+function getTotalReservedPeople() {
+  let total = 0;
+  const reservedInfo = JSON.parse(localStorage.getItem('reservedInfo')) || [];
+  reservedInfo.forEach(info => {
+    total += parseInt(info.people);
+  });
+  return total;
+}
+function handleSeatClick(e) {
+  const seat = e.target;
+  const totalReservedPeople = getTotalReservedPeople();
+
+  if (isReserving && e.altKey) {
+    if (!seat.classList.contains('reserved') && !seat.classList.contains('confirmed')) {
+      if (reservingSeats.length < totalReservedPeople) {
+        seat.classList.add('reserving');
+        reservingSeats.push(seat);
+      } else {
+        alert(`임시 예약 가능한 좌석 수는 ${totalReservedPeople}석입니다.`);
+      }
+    }
+  } else {
+    reservingSeats.forEach(reservingSeat => {
+      reservingSeat.classList.remove('reserving');
+      reservingSeat.classList.add('reserved');
+    });
+    reservingSeats = [];
+    isReserving = false;
+  }
 }
