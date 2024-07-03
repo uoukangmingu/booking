@@ -46,23 +46,31 @@ window.addEventListener('load', () => {
     updateSeatInfo();
 });
 
-
 function toggleSeatSelection() {
     if (this.classList.contains('confirmed')) return;
 
-    if (event.ctrlKey) {
-        // Ctrl 키를 누른 상태에서 클릭한 경우
+    if (event.altKey) {
+        this.classList.toggle('starred');
+        const starIcon = this.querySelector('.star-icon');
+        if (starIcon) {
+            starIcon.remove();
+        } else {
+            const icon = document.getElementById('starIcon').cloneNode(true);
+            icon.classList.add('star-icon');
+            icon.style.display = 'block';
+            this.appendChild(icon);
+        }
+    } else if (event.ctrlKey) {
+        // Ctrl 키를 누른 상태에서 클릭한 경우 (기존 코드)
         if (this.classList.contains('prohibited')) {
-            // 금지 좌석인 경우, 금지를 해제
             this.classList.remove('prohibited');
             prohibitedSeats = prohibitedSeats.filter(seat => seat !== this);
         } else {
-            // 일반 좌석인 경우, 금지 좌석으로 설정
             this.classList.add('prohibited');
             prohibitedSeats.push(this);
         }
     } else {
-        // 일반적인 좌석 선택/해제 로직
+        // 일반적인 좌석 선택/해제 로직 (기존 코드)
         this.classList.toggle('selected');
         const index = selectedSeats.indexOf(this);
         if (index === -1) {
@@ -72,6 +80,7 @@ function toggleSeatSelection() {
         }
     }
 }
+
 
 
 async function confirmSelectedSeats() {
@@ -460,3 +469,4 @@ function processReservationInfo(phoneLastFour) {
   // 예약자 정보 처리 로직 구현
   console.log('예약자 휴대전화 뒷번호:', phoneLastFour);
 }
+

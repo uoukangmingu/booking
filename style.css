@@ -29,6 +29,7 @@
 
 
 .seat {
+    position: relative;
     background-color: #ccc;
     border-radius: 5px;
     display: flex;
@@ -708,7 +709,16 @@ body.dark-mode .legend {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.seat.reserved {
-  background-color: yellow;
-  pointer-events: none; /* 클릭 이벤트 비활성화 */
+.star-icon {
+    width: 46px;
+    height: 16px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.starred .star-icon {
+    opacity: 1;
 }
