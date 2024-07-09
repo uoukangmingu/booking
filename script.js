@@ -500,3 +500,26 @@ function processReservationInfo(phoneLastFour) {
   // 예약자 정보 처리 로직 구현
   console.log('예약자 휴대전화 뒷번호:', phoneLastFour);
 }
+
+
+let freeSeatsCount = 0;
+
+const freeSeatsIncBtn = document.getElementById('freeSeatsIncBtn');
+const freeSeatsDecBtn = document.getElementById('freeSeatsDecBtn');
+const freeSeatsCountDisplay = document.getElementById('freeSeatsCount');
+
+freeSeatsIncBtn.addEventListener('click', () => {
+freeSeatsCount++;
+updateFreeSeatsCount();
+});
+
+freeSeatsDecBtn.addEventListener('click', () => {
+if (freeSeatsCount > 0) {
+freeSeatsCount--;
+updateFreeSeatsCount();
+}
+});
+
+function updateFreeSeatsCount() {
+freeSeatsCountDisplay.textContent = freeSeatsCount;
+}

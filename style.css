@@ -722,3 +722,30 @@ body.dark-mode .legend {
 .starred .star-icon {
     opacity: 1;
 }
+
+.free-seats-btn {
+background-color: #f2f2f2;
+border: none;
+padding: 5px 10px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin-left: 10px;
+cursor: pointer;
+border-radius: 5px;
+}
+
+.free-seats-inc-btn, .free-seats-dec-btn {
+background-color: #4CAF50;
+color: white;
+padding: 5px 10px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+margin: 0 5px;
+}
+
+.free-seats-inc-btn:hover, .free-seats-dec-btn:hover {
+background-color: #45a049;
+}
