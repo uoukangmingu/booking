@@ -73,6 +73,7 @@ function toggleSeatSelection() {
             icon.style.display = 'block';
             this.appendChild(icon);
         }
+
     } else if (event.ctrlKey) {
         // Ctrl 키를 누른 상태에서 클릭한 경우 (기존 코드)
         if (this.classList.contains('prohibited')) {
@@ -82,6 +83,7 @@ function toggleSeatSelection() {
             this.classList.add('prohibited');
             prohibitedSeats.push(this);
         }
+    saveProhibitedSeats();
     } else {
         // 일반적인 좌석 선택/해제 로직 (기존 코드)
         this.classList.toggle('selected');
@@ -245,6 +247,24 @@ function cancelAllSeats() {
 }
 
 
+// 금지좌석 정보 저장 및 불러오기
+function saveProhibitedSeats() {
+  const prohibitedSeatIndexes = prohibitedSeats.map(seat => seats.indexOf(seat));
+  localStorage.setItem('prohibitedSeats', JSON.stringify(prohibitedSeatIndexes));
+}
+
+function loadProhibitedSeats() {
+  const prohibitedSeatIndexes = JSON.parse(localStorage.getItem('prohibitedSeats')) || [];
+  prohibitedSeatIndexes.forEach(index => {
+    const seat = seats[index];
+    seat.classList.add('prohibited');
+    prohibitedSeats.push(seat);
+  });
+}
+
+// 페이지 로드 시 금지좌석 정보 불러오기
+window.addEventListener('load', loadProhibitedSeats);
+
 function toggleCancelTarget() {
     if (this.classList.contains('confirmed') || this.classList.contains('discounted')) {
         if (this.classList.contains('cancel-target')) {
@@ -256,6 +276,7 @@ function toggleCancelTarget() {
         }
     }
 }
+
 
 
 function cancelSelectedSeats() {
@@ -523,3 +544,4 @@ updateFreeSeatsCount();
 function updateFreeSeatsCount() {
 freeSeatsCountDisplay.textContent = freeSeatsCount;
 }
+
