@@ -319,15 +319,18 @@ createSeats();
 confirmBtn.addEventListener('click', confirmSelectedSeats);
 
 function updateSeatInfo() {
-    const remainingSeats = seats.filter(seat => !seat.classList.contains('confirmed') && !seat.classList.contains('prohibited')).length;
-    const totalSeats = seats.length - prohibitedSeats.length;
-    const totalAudience = totalSeats - remainingSeats;
-    const discountedSeatsCount = seats.filter(seat => seat.classList.contains('discounted')).length;
+const remainingSeats = seats.filter(seat => !seat.classList.contains('confirmed') && !seat.classList.contains('prohibited')).length;
+const totalSeats = seats.length;
+const prohibitedSeats = seats.filter(seat => seat.classList.contains('prohibited')).length;
+const actualTotalSeats = totalSeats - prohibitedSeats;
+const totalAudience = actualTotalSeats - remainingSeats;
+const discountedSeatsCount = seats.filter(seat => seat.classList.contains('discounted')).length;
 
-    document.getElementById('remainingSeats').textContent = remainingSeats;
-    document.getElementById('totalSeats').textContent = totalSeats;
-    document.getElementById('totalAudience').textContent = totalAudience;
-    document.getElementById('discountedSeatsCount').textContent = `(할인권 사용: ${discountedSeatsCount}석)`;
+
+document.getElementById('remainingSeats').textContent = remainingSeats;
+document.getElementById('totalSeats').textContent = actualTotalSeats;
+document.getElementById('totalAudience').textContent = totalAudience;
+document.getElementById('discountedSeatsCount').textContent = `(할인권 사용: ${discountedSeatsCount}석)`;
 }
 
 const stage = document.querySelector('.stage');
