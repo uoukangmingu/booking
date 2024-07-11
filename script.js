@@ -248,21 +248,24 @@ function cancelAllSeats() {
 
 // 금지좌석 정보 저장 및 불러오기
 function saveProhibitedSeats() {
-  const prohibitedSeatIndexes = prohibitedSeats.map(seat => seats.indexOf(seat));
-  localStorage.setItem('prohibitedSeats', JSON.stringify(prohibitedSeatIndexes));
+    const prohibitedSeatIndexes = prohibitedSeats.map(seat => seats.indexOf(seat));
+    localStorage.setItem('prohibitedSeats', JSON.stringify(prohibitedSeatIndexes));
 }
 
 function loadProhibitedSeats() {
-  const prohibitedSeatIndexes = JSON.parse(localStorage.getItem('prohibitedSeats')) || [];
-  prohibitedSeatIndexes.forEach(index => {
-    const seat = seats[index];
-    seat.classList.add('prohibited');
-    prohibitedSeats.push(seat);
-  });
+    const prohibitedSeatIndexes = JSON.parse(localStorage.getItem('prohibitedSeats')) || [];
+    prohibitedSeatIndexes.forEach(index => {
+        const seat = seats[index];
+        seat.classList.add('prohibited');
+        prohibitedSeats.push(seat);
+    });
 }
 
 // 페이지 로드 시 금지좌석 정보 불러오기
-window.addEventListener('load', loadProhibitedSeats);
+window.addEventListener('load', () => {
+    loadProhibitedSeats();
+});
+
 
 function toggleCancelTarget() {
     if (this.classList.contains('confirmed') || this.classList.contains('discounted')) {
@@ -333,12 +336,12 @@ document.getElementById('discountedSeatsCount').textContent = `(할인권 사용
 }
 
 const stage = document.querySelector('.stage');
-
 stage.addEventListener('click', () => {
     prohibitedSeats.forEach(seat => {
         seat.classList.remove('prohibited');
     });
     prohibitedSeats = [];
+    saveProhibitedSeats();
 });
 
 
@@ -546,4 +549,3 @@ updateFreeSeatsCount();
 function updateFreeSeatsCount() {
 freeSeatsCountDisplay.textContent = freeSeatsCount;
 }
-
