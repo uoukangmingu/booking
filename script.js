@@ -200,7 +200,6 @@ async function confirmSelectedSeats() {
     showConfirmMessage('선택한 좌석이 확정되었습니다.');
     selectedSeats.length = 0;
     prohibitedSeats.length = 0;
-    toggleCancelContainer();
     updateSeatInfo();
 }
 
