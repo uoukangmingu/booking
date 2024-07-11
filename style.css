@@ -43,15 +43,15 @@
 }
 
 .seat.selected {
-    background-color: #05F258;
+  background-color: #4CAF50;
 }
 
 .seat.confirmed {
-    background-color: #013440;
+  background-color: #2196F3;
 }
 
 .seat.cancel-target {
-    background-color: #FF0000;
+  background-color: #E53935;
 }
 
 .button-container {
@@ -144,10 +144,10 @@
 }
 
 .seat.discounted {
-    background-color: purple; /* 할인권 사용 좌석 색상 */
+  background-color: #9C27B0; /* 할인권 사용 좌석 색상 */
 }
 .seat.discounted.cancel-target {
-    background-color: #FF0000;
+  background-color: #E53935;
 }
 .prompt {
     position: fixed;
@@ -291,9 +291,12 @@
 
 /* 예약자 정보 입력 모달 스타일 */
 #reservationInfoModal {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
@@ -304,7 +307,6 @@
 
 #reservationInfoModal .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 30%;
@@ -441,7 +443,7 @@
     background-color: #ccc;
     color: #ccc;
     cursor: not-allowed;
-    pointer-events: none; /* 금지 좌석에 대한 클릭 이벤트 비활성화 */
+    pointer-events: none;
 }
 
 .zoom-controls {
